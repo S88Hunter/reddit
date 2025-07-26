@@ -26,6 +26,14 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
+    .snoo-logo {
+      width: 32px;
+      height: 32px;
+      background: url('https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png') no-repeat center;
+      background-size: contain;
+      margin-bottom: 10px;
+    }
+
     .main {
       flex: 1;
       display: flex;
@@ -177,17 +185,30 @@
       color: #1A1A1B;
     }
 
+    .post-flair {
+      background: #FF4500;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+
     .post-title {
       font-size: 18px;
       font-weight: 700;
       margin: 10px 0;
       color: #1A1A1B;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .post-image {
       max-width: 100%;
       border-radius: 4px;
       margin: 10px 0;
+      cursor: pointer;
     }
 
     .post-actions {
@@ -235,6 +256,20 @@
       margin-top: 5px;
     }
 
+    .pinned-comment {
+      background: #F6F7F8;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #1A1A1B;
+    }
+
+    .pinned-comment .comment-author {
+      font-weight: 700;
+      color: #0079D3;
+    }
+
     .bottom-bar {
       position: fixed;
       bottom: 0;
@@ -259,6 +294,35 @@
       display: block;
       margin-bottom: 5px;
       color: #1A1A1B;
+    }
+
+    /* Modal for Image */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 4px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
     }
 
     /* Dark Mode */
@@ -317,6 +381,11 @@
         color: #878A8C;
       }
 
+      .pinned-comment {
+        background: #272729;
+        color: #D7DADC;
+      }
+
       .bottom-bar {
         background: #1A1A1B;
         border-top: 1px solid #2A2A2B;
@@ -359,6 +428,7 @@
 </head>
 <body>
   <div class="sidebar">
+    <div class="snoo-logo"></div>
     <h3 style="color: #FF4500;">About u/S88</h3>
     <p><strong>Post Karma:</strong> 65,200</p>
     <p><strong>Comment Karma:</strong> 21,200</p>
@@ -396,9 +466,12 @@
         <div class="post-header">
           <span class="subreddit">r/fakeSub</span> • Posted by u/S88 • 2h ago
         </div>
-        <div class="post-title">Check out this awesome moment!</div>
-        <img class="post-image" src="https://i.postimg.cc/SxGhM2TP/RDT-20250628-0852191356977231564136252.png" alt="Post Image" />
-        <div class="post-meta">170k views</div>
+        <div class="post-title">
+          Check out this awesome moment!
+          <span class="post-flair">Epic</span>
+        </div>
+        <img class="post-image" src="https://i.postimg.cc/SxGhM2TP/RDT-20250628-0852191356977231564136252.png" alt="Post Image" onclick="openModal()" />
+        <div class="post-meta">170k views • 12 awards</div>
         <div class="post-actions">
           <div class="vote">
             <svg class="upvote" onclick="vote('upvote', this)" viewBox="0 0 24 24" fill="#7C7C7C">
@@ -409,9 +482,13 @@
               <path d="M12 20l8-8h-5v-8h-6v8H4l8 8z"/>
             </svg>
           </div>
-          <div><i class="fas fa-comment"></i> 1.2k Comments</div>
+          <div onclick="showComment()"><i class="fas fa-comment"></i> 1.2k Comments</div>
           <div><i class="fas fa-share"></i> Share</div>
           <div><i class="far fa-bookmark" onclick="toggleSave(this)"></i> Save</div>
+          <div><i class="fas fa-gift"></i> Award</div>
+        </div>
+        <div class="pinned-comment">
+          <span class="comment-author">u/ModBot</span>: This post is blowing up! Keep it civil, folks! <i class="fas fa-thumbtack"></i>
         </div>
       </div>
     </div>
@@ -435,6 +512,12 @@
     </div>
   </div>
 
+  <!-- Modal for Image -->
+  <div class="modal" id="imageModal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" src="https://i.postimg.cc/SxGhM2TP/RDT-20250628-0852191356977231564136252.png" alt="Post Image" />
+  </div>
+
   <script>
     function showTab(tab, el) {
       const content = document.getElementById('tabContent');
@@ -448,9 +531,12 @@
             <div class="post-header">
               <span class="subreddit">r/fakeSub</span> • Posted by u/S88 • 2h ago
             </div>
-            <div class="post-title">Check out this awesome moment!</div>
-            <img class="post-image" src="https://i.postimg.cc/28yTxGBB/IMG-20250723-213737-475.webp" alt="Post Image" />
-            <div class="post-meta">170k views</div>
+            <div class="post-title">
+              Check out this awesome moment!
+              <span class="post-flair">Epic</span>
+            </div>
+            <img class="post-image" src="https://i.postimg.cc/SxGhM2TP/RDT-20250628-0852191356977231564136252.png" alt="Post Image" onclick="openModal()" />
+            <div class="post-meta">170k views • 12 awards</div>
             <div class="post-actions">
               <div class="vote">
                 <svg class="upvote" onclick="vote('upvote', this)" viewBox="0 0 24 24" fill="#7C7C7C">
@@ -461,9 +547,13 @@
                   <path d="M12 20l8-8h-5v-8h-6v8H4l8 8z"/>
                 </svg>
               </div>
-              <div><i class="fas fa-comment"></i> 1.2k Comments</div>
+              <div onclick="showComment()"><i class="fas fa-comment"></i> 1.2k Comments</div>
               <div><i class="fas fa-share"></i> Share</div>
               <div><i class="far fa-bookmark" onclick="toggleSave(this)"></i> Save</div>
+              <div><i class="fas fa-gift"></i> Award</div>
+            </div>
+            <div class="pinned-comment">
+              <span class="comment-author">u/ModBot</span>: This post is blowing up! Keep it civil, folks! <i class="fas fa-thumbtack"></i>
             </div>
           </div>
         `;
@@ -529,6 +619,20 @@
       el.classList.toggle('fas');
       el.classList.toggle('far');
       el.style.color = el.classList.contains('fas') ? '#FF4500' : '';
+    }
+
+    function showComment() {
+      alert('Top Comment: "This is epic!" by u/CoolUser • 500 upvotes');
+    }
+
+    function openModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
     }
 
     // Popup Logic
