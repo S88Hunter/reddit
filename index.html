@@ -2,121 +2,237 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>u/S88</title>
+  <title>u/S88 (Reddit Profile)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
-      font-family: 'Noto Sans', sans-serif;
-      background: #1a1a2e;
-      color: white;
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: #DAE0E6;
+      color: #1A1A1B;
       display: flex;
+      min-height: 100vh;
     }
 
+    /* Light Mode */
     .sidebar {
-      width: 250px;
-      background: #0f0f1c;
+      width: 300px;
+      background: #fff;
       padding: 20px;
-      border-right: 1px solid #333;
+      border-right: 1px solid #D7DADC;
       box-sizing: border-box;
-      display: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .main {
       flex: 1;
       display: flex;
       flex-direction: column;
+      background: #F6F7F8;
     }
 
     .header {
-      text-align: center;
-      padding: 30px 20px 20px;
+      background: #fff;
+      padding: 20px;
+      border-bottom: 1px solid #D7DADC;
+      text-align: left;
+      position: relative;
+    }
+
+    .cover-photo {
+      height: 150px;
+      background: linear-gradient(135deg, #FF4500, #0079D3);
+      border-radius: 4px 4px 0 0;
     }
 
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background-color: #ccc;
-      margin: auto;
+      margin: -40px 20px 10px;
       background-image: url('https://i.postimg.cc/28yTxGBB/IMG-20250723-213737-475.webp');
       background-size: cover;
       background-position: center;
+      border: 3px solid #fff;
     }
 
     .buttons {
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin: 15px 0;
+      gap: 10px;
+      margin: 10px 20px;
     }
 
-    .buttons svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
+    .button {
+      background: #0079D3;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .button:hover {
+      background: #005F9E;
     }
 
     .username {
-      font-size: 22px;
-      font-weight: bold;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .username i {
+      color: #FF4500;
     }
 
     .karma {
       font-size: 14px;
-      margin-top: 5px;
-      color: #ccc;
+      margin: 5px 20px;
+      color: #1A1A1B;
     }
 
     .info {
       font-size: 13px;
-      color: #aaa;
+      color: #7C7C7C;
+      margin: 5px 20px;
     }
 
-    .null {
-      color: #777;
-      font-style: italic;
+    .cake-day {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #0079D3;
+      font-weight: 500;
     }
 
     .tabs {
       display: flex;
-      justify-content: space-around;
-      background: #0f3460;
-      border-top: 1px solid #444;
-      border-bottom: 1px solid #444;
-      flex-wrap: wrap;
+      background: #fff;
+      border-bottom: 1px solid #D7DADC;
+      margin-bottom: 20px;
     }
 
     .tabs div {
-      flex: 1;
-      text-align: center;
-      padding: 10px 0;
-      color: #aaa;
-      font-weight: bold;
+      padding: 12px 20px;
+      color: #7C7C7C;
+      font-weight: 500;
       cursor: pointer;
       position: relative;
+      transition: color 0.2s;
+    }
+
+    .tabs div:hover {
+      color: #1A1A1B;
     }
 
     .tabs .active {
-      color: white;
+      color: #FF4500;
+      font-weight: 700;
     }
 
     .tabs .active::after {
       content: "";
       position: absolute;
       bottom: 0;
-      left: 25%;
-      right: 25%;
+      left: 20px;
+      right: 20px;
       height: 3px;
-      background: #0079d3;
+      background: #FF4500;
     }
 
     .content {
       padding: 20px;
-      min-height: 200px;
-      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      flex: 1;
+    }
+
+    .post {
+      background: #fff;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #7C7C7C;
+      margin-bottom: 10px;
+    }
+
+    .post-header .subreddit {
+      font-weight: 700;
+      color: #1A1A1B;
+    }
+
+    .post-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 10px 0;
+      color: #1A1A1B;
+    }
+
+    .post-image {
+      max-width: 100%;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+      color: #7C7C7C;
+      margin-top: 10px;
+    }
+
+    .post-actions div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .vote {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .vote svg {
+      width: 16px;
+      height: 16px;
+      transition: fill 0.2s;
+    }
+
+    .upvote.active {
+      fill: #FF4500;
+    }
+
+    .downvote.active {
+      fill: #7193FF;
+    }
+
+    .post-actions i {
+      font-size: 14px;
+    }
+
+    .post-meta {
+      font-size: 12px;
+      color: #7C7C7C;
+      margin-top: 5px;
     }
 
     .bottom-bar {
@@ -124,108 +240,198 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: #0f0f1c;
-      border-top: 1px solid #333;
+      background: #fff;
+      border-top: 1px solid #D7DADC;
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
-    }
-
-    .bottom-bar svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-      display: block;
-      margin: auto;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .bottom-bar div {
       font-size: 10px;
-      color: white;
+      color: #7C7C7C;
       text-align: center;
     }
 
-    @media screen and (min-width: 768px) {
-      .sidebar {
-        display: block;
-      }
+    .bottom-bar i {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 5px;
+      color: #1A1A1B;
     }
 
-    @media screen and (max-width: 600px) {
-      .buttons svg {
-        width: 20px;
-        height: 20px;
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #030303;
+        color: #D7DADC;
       }
 
-      .username {
-        font-size: 20px;
+      .sidebar {
+        background: #1A1A1B;
+        border-right: 1px solid #2A2A2B;
+        box-shadow: none;
       }
 
-      .karma {
-        font-size: 13px;
+      .main {
+        background: #030303;
+      }
+
+      .header {
+        background: #1A1A1B;
+        border-bottom: 1px solid #2A2A2B;
+      }
+
+      .avatar {
+        border: 3px solid #1A1A1B;
+      }
+
+      .tabs {
+        background: #1A1A1B;
+        border-bottom: 1px solid #2A2A2B;
       }
 
       .tabs div {
-        font-size: 13px;
+        color: #878A8C;
+      }
+
+      .tabs div:hover {
+        color: #D7DADC;
+      }
+
+      .post {
+        background: #1A1A1B;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .post-header .subreddit {
+        color: #D7DADC;
+      }
+
+      .post-title {
+        color: #D7DADC;
+      }
+
+      .post-meta, .post-actions {
+        color: #878A8C;
+      }
+
+      .bottom-bar {
+        background: #1A1A1B;
+        border-top: 1px solid #2A2A2B;
+        box-shadow: none;
+      }
+
+      .bottom-bar i {
+        color: #D7DADC;
+      }
+
+      .bottom-bar div {
+        color: #878A8C;
+      }
+
+      .karma, .info {
+        color: #D7DADC;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        background: #fff;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .main {
+          background: #1A1A1B;
+        }
+      }
+
+      .tabs div {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
-
   <div class="sidebar">
-    <h3>About u/S88</h3>
+    <h3 style="color: #FF4500;">About u/S88</h3>
     <p><strong>Post Karma:</strong> 65,200</p>
     <p><strong>Comment Karma:</strong> 21,200</p>
     <p><strong>Member Since:</strong> May 4, 2011</p>
+    <p class="cake-day"><i class="fas fa-birthday-cake"></i> Cake Day: May 4</p>
+    <p><i class="fas fa-trophy"></i> Reddit Premium User</p>
     <p>This user is a Reddit legend 👻</p>
   </div>
 
   <div class="main">
     <div class="header">
+      <div class="cover-photo"></div>
       <div class="avatar"></div>
-      <div class="buttons">
-        <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zM15 12a4 4 0 100-8 4 4 0 000 8zM1 14h4v2H1v3H0v-3H-3v-2h3v-3h1v3z"/></svg>
+      <div class="username">
+        u/S88 <i class="fas fa-award" title="Reddit Premium"></i>
       </div>
-      <div class="username">u/S88</div>
+      <div class="buttons">
+        <div class="button">Follow</div>
+        <div class="button"><i class="fas fa-comment"></i> Chat</div>
+      </div>
       <div class="karma">🏆 86,400 karma</div>
       <div class="info">Joined • May 4, 2011</div>
-      <div class="null">null</div>
+      <div class="info cake-day"><i class="fas fa-birthday-cake"></i> Cake Day: May 4</div>
     </div>
 
     <div class="tabs">
       <div class="active" onclick="showTab('posts', this)">Posts</div>
       <div onclick="showTab('comments', this)">Comments</div>
+      <div onclick="showTab('saved', this)">Saved</div>
       <div onclick="showTab('about', this)">About</div>
     </div>
 
     <div class="content" id="tabContent">
-      <h3>Let's try that again</h3>
-      <p>We had some trouble loading the data. Please try again.</p>
+      <div class="post">
+        <div class="post-header">
+          <span class="subreddit">r/fakeSub</span> • Posted by u/S88 • 2h ago
+        </div>
+        <div class="post-title">Check out this awesome moment!</div>
+        <img class="post-image" src="https://i.postimg.cc/SxGhM2TP/RDT-20250628-0852191356977231564136252.png" alt="Post Image" />
+        <div class="post-meta">170k views</div>
+        <div class="post-actions">
+          <div class="vote">
+            <svg class="upvote" onclick="vote('upvote', this)" viewBox="0 0 24 24" fill="#7C7C7C">
+              <path d="M12 4l-8 8h5v8h6v-8h5l-8-8z"/>
+            </svg>
+            <span id="vote-count">23k</span>
+            <svg class="downvote" onclick="vote('downvote', this)" viewBox="0 0 24 24" fill="#7C7C7C">
+              <path d="M12 20l8-8h-5v-8h-6v8H4l8 8z"/>
+            </svg>
+          </div>
+          <div><i class="fas fa-comment"></i> 1.2k Comments</div>
+          <div><i class="fas fa-share"></i> Share</div>
+          <div><i class="far fa-bookmark" onclick="toggleSave(this)"></i> Save</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="bottom-bar">
     <div>
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Home
+      <i class="fas fa-home"></i> Home
     </div>
     <div>
-      <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-      Communities
+      <i class="fas fa-users"></i> Communities
     </div>
     <div>
-      <svg viewBox="0 0 24 24"><path d="M13 11h8v2h-8v8h-2v-8H3v-2h8V3h2z"/></svg>
-      Create
+      <i class="fas fa-plus"></i> Create
     </div>
     <div>
-      <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 002 2zm6-6V9c0-3.07-1.63-5.64-4.5-6.32V2.5a1.5 1.5 0 00-3 0v.18C7.64 3.36 6 5.92 6 9v7l-2 2v1h16v-1l-2-2z"/></svg>
-      Chat
+      <i class="fas fa-comment"></i> Chat
     </div>
     <div>
-      <svg viewBox="0 0 24 24"><path d="M20 4H4v16h16V4zm-2 14H6V6h12v12z"/></svg>
-      Inbox
+      <i class="fas fa-envelope"></i> Inbox
     </div>
   </div>
 
@@ -238,25 +444,106 @@
 
       if (tab === 'posts') {
         content.innerHTML = `
-          <h3>Let's try that again</h3>
-          <p>We had some trouble loading the data. Please try again.</p>
+          <div class="post">
+            <div class="post-header">
+              <span class="subreddit">r/fakeSub</span> • Posted by u/S88 • 2h ago
+            </div>
+            <div class="post-title">Check out this awesome moment!</div>
+            <img class="post-image" src="https://i.postimg.cc/28yTxGBB/IMG-20250723-213737-475.webp" alt="Post Image" />
+            <div class="post-meta">170k views</div>
+            <div class="post-actions">
+              <div class="vote">
+                <svg class="upvote" onclick="vote('upvote', this)" viewBox="0 0 24 24" fill="#7C7C7C">
+                  <path d="M12 4l-8 8h5v8h6v-8h5l-8-8z"/>
+                </svg>
+                <span id="vote-count">23k</span>
+                <svg class="downvote" onclick="vote('downvote', this)" viewBox="0 0 24 24" fill="#7C7C7C">
+                  <path d="M12 20l8-8h-5v-8h-6v8H4l8 8z"/>
+                </svg>
+              </div>
+              <div><i class="fas fa-comment"></i> 1.2k Comments</div>
+              <div><i class="fas fa-share"></i> Share</div>
+              <div><i class="far fa-bookmark" onclick="toggleSave(this)"></i> Save</div>
+            </div>
+          </div>
         `;
       } else if (tab === 'comments') {
         content.innerHTML = `
-          <h3>Recent Comments</h3>
-          <p>• "This deserves more upvotes!" on r/fakeSub</p>
-          <p>• "I totally agree with you." - 125 upvotes</p>
+          <div class="post">
+            <h3>Recent Comments</h3>
+            <p>• "This deserves more upvotes!" on r/fakeSub • 125 upvotes</p>
+            <p>• "I totally agree with you." on r/anotherSub • 80 upvotes</p>
+          </div>
+        `;
+      } else if (tab === 'saved') {
+        content.innerHTML = `
+          <div class="post">
+            <h3>Saved Posts</h3>
+            <p>• Saved post from r/fakeSub: "Amazing content!"</p>
+          </div>
         `;
       } else if (tab === 'about') {
         content.innerHTML = `
-          <h3>About u/S88</h3>
-          <p><strong>Post Karma:</strong> 65,200</p>
-          <p><strong>Comment Karma:</strong> 21,200</p>
-          <p><strong>Member Since:</strong> May 4, 2011</p>
-          <p>This user is a Reddit legend 👻</p>
+          <div class="post">
+            <h3>About u/S88</h3>
+            <p><strong>Post Karma:</strong> 65,200</p>
+            <p><strong>Comment Karma:</strong> 21,200</p>
+            <p><strong>Member Since:</strong> May 4, 2011</p>
+            <p><i class="fas fa-birthday-cake"></i> Cake Day: May 4</p>
+            <p>This user is a Reddit legend 👻</p>
+          </div>
         `;
       }
     }
+
+    function vote(type, el) {
+      const voteCount = document.getElementById('vote-count');
+      let count = parseInt(voteCount.textContent.replace('k', '')) * 1000;
+      const upvote = el.parentElement.querySelector('.upvote');
+      const downvote = el.parentElement.querySelector('.downvote');
+
+      if (type === 'upvote') {
+        if (upvote.classList.contains('active')) {
+          upvote.classList.remove('active');
+          count -= 100;
+        } else {
+          upvote.classList.add('active');
+          downvote.classList.remove('active');
+          count += 100;
+        }
+      } else if (type === 'downvote') {
+        if (downvote.classList.contains('active')) {
+          downvote.classList.remove('active');
+          count += 100;
+        } else {
+          downvote.classList.add('active');
+          upvote.classList.remove('active');
+          count -= 100;
+        }
+      }
+
+      voteCount.textContent = `${Math.round(count / 100) / 10}k`;
+    }
+
+    function toggleSave(el) {
+      el.classList.toggle('fas');
+      el.classList.toggle('far');
+      el.style.color = el.classList.contains('fas') ? '#FF4500' : '';
+    }
+
+    // Popup Logic
+    function showFirstPopup() {
+      alert('Hey dummy, what are you doing here? This is a fake page!');
+      setTimeout(showSecondPopup, 10000); // Show second popup after 10 seconds
+    }
+
+    function showSecondPopup() {
+      alert('What are you still doing here, dummy? Get out! kkk');
+      setTimeout(showFirstPopup, 5000); // Loop back to first popup after 5 seconds
+    }
+
+    // Start the popup cycle
+    setTimeout(showFirstPopup, 5000);
   </script>
 </body>
 </html>
